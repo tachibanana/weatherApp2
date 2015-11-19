@@ -1,10 +1,12 @@
 package com.test.groovy
 
-class Util extends Services{
+class Util{
+	
+	private Services sv = new Services()
 	
 	//return CityForecast Object
 	def getCityForecast(zip){
-		def cityForecast = this.getCityForecastByZIP(zip)
+		def cityForecast = sv.getCityForecastByZIP(zip)
 		def forecast = new Forecast(
 			date:cityForecast.ForecastResult.Forecast.Date,
 			weatherId:cityForecast.ForecastResult.Forecast.WeatherID,
@@ -27,8 +29,7 @@ class Util extends Services{
 	
 	//return CityWeather Object
 	def getCityWeather(zip){
-		def cityWeather = this.getCityWeatherByZIP(zip)
-		
+		def cityWeather = sv.getCityWeatherByZIP(zip)
 		new CityWeather(
 			success:cityWeather.Success,
 			responseText:cityWeather.ResponseText,
@@ -49,7 +50,7 @@ class Util extends Services{
 		
 	//return WeatherInformation Object
 	def getWeatherInformations(){
-		def weatherInformation = this.getWeatherInformation()
+		def weatherInformation = sv.getWeatherInformation()
 		
 		new WeatherInformation(
 			weatherId:weatherInformation.WeatherDescription.WeatherID,
